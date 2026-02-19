@@ -42,7 +42,7 @@ export function generateDailyPuzzle(date: Date = new Date()): Grid {
  * Get today's date as a formatted string.
  */
 export function getTodayString(): string {
-  return new Date().toLocaleDateString('fr-FR', {
+  return new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',

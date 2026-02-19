@@ -1,151 +1,139 @@
-# 🐴 MiniVibes — J01 : Enclose Horse
+# 🐴 Enclose Horse
 
-> Reproduction du jeu [enclose.horse](https://enclose.horse) — un puzzle game où le joueur place des murs sur une grille pour enclore la plus grande surface possible avec un nombre limité de segments.
+> A puzzle game where the player places walls on a grid to enclose the largest possible area with a limited number of wall segments. Inspired by [enclose.horse](https://enclose.horse).
 
-## 📋 Spécification du projet
+## 📋 Project Specification
 
-### 1. Découpage fonctionnel et technique
+### 1. Functional and Technical Breakdown
 
-#### Front-end (Single Page Application)
-| Module | Responsabilité |
+#### Frontend (Single Page Application)
+| Module | Responsibility |
 |---|---|
-| **UI / Layout** | Affichage de la grille, score, compteur de murs restants, boutons (reset, partage) |
-| **Moteur de jeu** | Logique de placement des murs, calcul des zones enclosées, scoring |
-| **Rendu Canvas** | Dessin de la grille, des murs, animation des chevaux 🐴, feedback visuel |
-| **Stockage local** | Sauvegarde de la progression quotidienne (`localStorage`) |
+| **UI / Layout** | Grid display, score, remaining walls counter, buttons (reset) |
+| **Game Engine** | Wall placement logic, enclosed zone detection, scoring |
+| **Canvas Rendering** | Grid drawing, walls, horse animation 🐴, visual feedback |
+| **Local Storage** | Save daily progress to localStorage |
 
-#### Back-end (optionnel pour v1)
-- Génération de puzzles quotidiens (seed basé sur la date)
-- Pas de serveur nécessaire pour la v1 — tout est côté client
+#### Backend (Optional for v1)
+- Daily puzzle generation (date-based seed)
+- No server needed for v1 — everything client-side
 
-### 2. Stack technique
+### 2. Technology Stack
 
-| Élément | Choix |
+| Element | Choice |
 |---|---|
-| **Langage** | TypeScript |
-| **Framework** | Vanilla (pas de framework UI lourd) |
-| **Outil de build** | [Vite](https://vitejs.dev/) |
-| **Rendu** | HTML5 Canvas API |
-| **Styles** | CSS natif (ou CSS Modules) |
-| **Formatage** | Prettier |
-| **Linting** | ESLint |
-| **Tests** | Vitest |
-| **Conteneurisation** | Docker + nginx (fichiers statiques) |
-| **Gestionnaire de packages** | npm |
+| **Language** | TypeScript |
+| **Framework** | Vanilla (no heavy UI framework) |
+| **Build Tool** | [Vite](https://vitejs.dev/) |
+| **Rendering** | HTML5 Canvas API |
+| **Styles** | Pure CSS |
+| **Testing** | Vitest |
+| **Containerization** | Docker + nginx (static files) |
+| **Package Manager** | npm |
 
-### 3. Contraintes et ressources
+### 3. Constraints and Resources
 
-- ⏱️ Temps : projet d'une journée
-- 🪙 Tokens : utilisation de modèles "mini" (0.33x), 1 requête premium max
-- 🧩 Le jeu doit tourner dans un navigateur web moderne
+- ⏱️ Time: one-day project
+- 🧩 Must run in modern web browsers
 - 📱 Responsive design (mobile-first)
-- 🔒 Pas d'injection possible (pas de backend, donc pas de SQL/XSS côté serveur)
+- 🔒 No injection risks (client-only, no backend)
 
-### 4. Règles de rendu et de fidélité
+### 4. Render Rules and Fidelity
 
-#### Objectif visuel
-- Grille carrée avec intersections cliquables pour placer des murs
-- Chevaux (🐴) placés sur certaines cases
-- Murs visibles comme segments entre deux points de la grille
-- Score affiché en temps réel
+#### Visual Objective
+- Square grid with clickable intersections for wall placement
+- Horses (🐴) placed on certain cells
+- Walls visible as segments between grid points
+- Real-time score display
 
-#### Critères de succès minimal
-- [ ] La grille s'affiche correctement
-- [ ] Le joueur peut placer et retirer des murs
-- [ ] Le compteur de murs restants se met à jour
-- [ ] Les zones enclosées sont détectées et colorées
-- [ ] Le score (nombre de chevaux enclos × surface) est calculé
-- [ ] Le puzzle change chaque jour (seed basé sur la date)
+#### Success Criteria
+- [x] Grid displays correctly
+- [x] Player can place and remove walls
+- [x] Wall counter updates
+- [x] Enclosed zones detected and highlighted
+- [x] Score calculation (enclosed horses)
+- [x] Daily puzzle changes (date-based seed)
 
-#### Vérifications automatisables
-- Tests unitaires sur le moteur de jeu (calcul d'enclos, scoring)
-- Tests sur la génération de grille
-- Lint + format vérifiés en CI
-
-### 5. Organisation du projet
+### 5. Project Organization
 
 ```
 openclaw/
 ├── .gitignore
-├── README.md                # Ce fichier
-├── COPILOT.md               # Contexte pour l'agent IA
-├── MiniVibes.pdf            # Sujet original
-├── Dockerfile               # Conteneurisation
-├── docker-compose.yml       # Orchestration Docker
+├── README.md                # This file
+├── COPILOT.md               # AI agent context
+├── Dockerfile               # Containerization
+├── docker-compose.yml       # Docker orchestration
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
-├── index.html               # Point d'entrée HTML
-├── public/
-│   └── favicon.ico
+├── index.html               # HTML entry point
 ├── src/
-│   ├── main.ts              # Point d'entrée de l'application
+│   ├── main.ts              # Application entry
 │   ├── game/
-│   │   ├── grid.ts          # Modèle de la grille
-│   │   ├── engine.ts        # Moteur de jeu (logique)
-│   │   ├── scoring.ts       # Calcul du score
-│   │   └── puzzle.ts        # Génération de puzzle quotidien
+│   │   ├── grid.ts          # Grid model
+│   │   ├── engine.ts        # Game logic (enclosed regions)
+│   │   ├── scoring.ts       # Score calculation
+│   │   └── puzzle.ts        # Daily puzzle generation
 │   ├── renderer/
-│   │   ├── canvas.ts        # Rendu Canvas
-│   │   └── animations.ts    # Animations
+│   │   └── canvas.ts        # Canvas rendering
 │   ├── ui/
-│   │   ├── controls.ts      # Boutons, interactions
-│   │   └── hud.ts           # Affichage tête haute (score, murs)
+│   │   ├── controls.ts      # Button interactions
+│   │   └── hud.ts           # Score/walls display
 │   ├── utils/
-│   │   └── seed.ts          # Générateur de seed par date
+│   │   └── seed.ts          # Date-based seeding
 │   └── styles/
-│       └── main.css         # Styles globaux
+│       └── main.css         # Global styles
 └── tests/
     ├── grid.test.ts
     ├── engine.test.ts
-    └── scoring.test.ts
+    ├── scoring.test.ts
+    └── seed.test.ts
 ```
 
-### 6. Stratégie de développement
+### 6. Development Strategy
 
-| Étape | Description | Priorité |
+| Phase | Description | Priority |
 |---|---|---|
-| 1 | Setup projet (Vite + TS + config) | 🔴 Critique |
-| 2 | Modèle de grille + logique de placement | 🔴 Critique |
-| 3 | Rendu Canvas de la grille et des murs | 🔴 Critique |
-| 4 | Détection des enclos (flood fill) | 🔴 Critique |
-| 5 | Scoring + UI (compteur, score) | 🟡 Important |
-| 6 | Génération de puzzle quotidien | 🟡 Important |
-| 7 | Animations + polish graphique | 🟢 Bonus |
+| 1 | Project setup (Vite + TS + config) | 🔴 Critical |
+| 2 | Grid model + wall placement logic | 🔴 Critical |
+| 3 | Canvas rendering | 🔴 Critical |
+| 4 | Enclosed zone detection (flood fill) | 🔴 Critical |
+| 5 | Scoring + UI | 🟡 Important |
+| 6 | Daily puzzle generation | 🟡 Important |
+| 7 | Polish & animations | 🟢 Bonus |
 | 8 | Responsive + mobile | 🟢 Bonus |
-| 9 | Docker + tests | 🟢 Bonus |
-| 10 | Améliorations (partage, leaderboard) | ⚪ Extra |
 
 ---
 
-## 🚀 Démarrage rapide
+## 🚀 Quick Start
 
 ```bash
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Lancer en mode développement
+# Development server
 npm run dev
 
-# Build pour la production
+# Build for production
 npm run build
 
-# Lancer les tests
+# Run tests
 npm run test
 
-# Lancer avec Docker
+# Docker
 docker-compose up
 ```
 
-## 📖 À propos du jeu original
+## 📖 About the Original Game
 
-**enclose.horse** est un jeu de puzzle quotidien où :
-1. Une grille est présentée avec des chevaux 🐴 placés sur certaines cases
-2. Le joueur dispose d'un nombre limité de murs à placer
-3. Les murs sont placés sur les bords entre les cases de la grille
-4. L'objectif est d'enclore le maximum de chevaux dans la plus petite surface possible
-5. Le score est calculé en fonction des chevaux enclos et de la surface
+**enclose.horse** is a daily puzzle game where:
+1. A grid is presented with horses 🐴 on certain cells
+2. Player has limited wall segments to place
+3. Walls go on edges between grid cells
+4. Goal: enclose maximum horses in minimum area
+5. Score = number of horses enclosed
 
-## 📝 Licence
+## 📝 License
 
-Projet éducatif — MiniVibes Challenge
+Educational project
+

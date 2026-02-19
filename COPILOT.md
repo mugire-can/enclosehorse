@@ -1,64 +1,70 @@
-# COPILOT.md — Contexte Agent IA
+# AI Agent Context
 
-## Projet
+## Project
 
-Reproduction du jeu **enclose.horse** — un puzzle game web où le joueur place des murs sur une grille pour enclore des chevaux. Projet MiniVibes J01.
+Enclose Horse — a puzzle game where the player places walls on a grid to enclose horses and maximize their score. Play a different puzzle each day.
 
-## Stack technique
+## Technology Stack
 
-- **Langage** : TypeScript (strict mode)
-- **Build** : Vite
-- **Rendu** : HTML5 Canvas
-- **Tests** : Vitest
-- **Formatage** : Prettier (single quotes, no semicolons, 2 spaces)
-- **Linting** : ESLint
-- **Conteneurisation** : Docker + nginx
+- **Language**: TypeScript (strict mode)
+- **Build**: Vite
+- **Rendering**: HTML5 Canvas
+- **Testing**: Vitest
+- **Containerization**: Docker + nginx
 
-## Conventions de code
+## Code Conventions
 
-- Utiliser TypeScript strict (`strict: true` dans tsconfig)
-- Nommer les fichiers en kebab-case
-- Nommer les types/interfaces en PascalCase
-- Nommer les fonctions/variables en camelCase
-- Un fichier = une responsabilité
-- Pas de `any` sauf cas exceptionnel documenté
-- Commenter uniquement la logique complexe (pas les évidences)
+- TypeScript strict mode (`strict: true`)
+- Kebab-case file names
+- PascalCase for types/interfaces
+- camelCase for functions/variables
+- One file = one responsibility
+- No `any` without justification
+- Comment only complex logic
 
 ## Architecture
 
 ```
 src/
-├── game/       # Logique métier (grille, moteur, scoring, puzzle)
-├── renderer/   # Rendu visuel (Canvas, animations)
-├── ui/         # Interface utilisateur (contrôles, HUD)
-├── utils/      # Utilitaires (seed, helpers)
+├── game/       # Game logic (grid, engine, scoring, puzzle)
+├── renderer/   # Canvas rendering
+├── ui/         # User interface (controls, HUD)
+├── utils/      # Utilities (seed, helpers)
 └── styles/     # CSS
 ```
 
-## Règles du jeu enclose.horse
+## Game Rules
 
-1. Une grille NxN est affichée avec des chevaux sur certaines cases
-2. Le joueur a un nombre limité de murs (segments) à placer
-3. Les murs se placent sur les bords entre deux cases adjacentes
-4. Un clic sur un bord place/retire un mur
-5. Les zones complètement enclosées par des murs sont détectées
-6. Le score = nombre de chevaux dans les zones enclosées
-7. Le puzzle change chaque jour (seed déterministe basé sur la date)
+1. NxN grid displays with horses on certain cells
+2. Player has limited wall segments to place
+3. Walls placed on edges between adjacent cells
+4. Click edge to place/remove wall
+5. Fully enclosed zones are detected automatically
+6. Score = number of horses in enclosed zones
+7. Daily puzzle changes (deterministic seed)
 
-## Commandes
+## Available Commands
 
 ```bash
-npm run dev      # Serveur de développement
-npm run build    # Build production
-npm run test     # Tests unitaires
-npm run lint     # Vérification du code
-npm run format   # Formatage du code
+npm run dev       # Development server
+npm run build     # Production build
+npm run test      # Run tests
 ```
 
-## Contraintes
+## Key Files
 
-- Tout le code doit être généré par l'agent IA
-- Versionner intelligemment avec Git
-- Pas d'injection possible (validation des inputs)
-- Code formaté de façon homogène
+- `src/main.ts` - Application entry point
+- `src/game/grid.ts` - Grid data structure and wall management
+- `src/game/engine.ts` - Enclosed region detection (flood fill)
+- `src/game/scoring.ts` - Score calculation
+- `src/renderer/canvas.ts` - Canvas rendering and interaction
+- `src/ui/controls.ts` - User input handling
+- `src/ui/hud.ts` - Score/walls display update
+
+## Constraints
+
+- No heavy dependencies
 - Responsive design
+- Deterministic daily puzzles
+- No backend required (v1)
+

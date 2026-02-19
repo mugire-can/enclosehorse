@@ -14,10 +14,16 @@
     "type": "git",
     "url": "git+https://github.com/mugire-can/openclaw.git"
   },
-  "keywords": ["enclose-horse", "puzzle", "game", "minivibes"],
+  "keywords": [
+    "enclose-horse",
+    "puzzle",
+    "game",
+    "minivibes"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jsdom": "^28.1.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vitest": "^4.0.18"

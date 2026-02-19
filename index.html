@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🐴 Enclose Horse</title>
+    <title>🐴 Enclose Horse - Daily Puzzle Game</title>
     <link rel="stylesheet" href="/src/styles/main.css" />
   </head>
   <body>
@@ -17,18 +17,30 @@
           <div class="hud-item">
             <span class="hud-label">Score</span>
             <span id="score" class="hud-value">0</span>
+            <span id="score-detail" class="hud-detail"></span>
           </div>
           <div class="hud-item">
-            <span class="hud-label">Walls Remaining</span>
+            <span class="hud-label">Walls Available</span>
             <span id="walls-remaining" class="hud-value">0</span>
+            <div id="walls-bar" class="walls-bar">
+              <div id="walls-fill" class="walls-fill"></div>
+            </div>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">Horses Enclosed</span>
+            <span id="horses-count" class="hud-value">0</span>
+            <span id="horses-detail" class="hud-detail"></span>
           </div>
         </div>
         <canvas id="game-canvas"></canvas>
+        <div id="feedback" class="feedback"></div>
         <div id="controls">
-          <button id="btn-reset" type="button">🔄 Reset</button>
+          <button id="btn-reset" type="button">🔄 New Game</button>
+          <button id="btn-undo" type="button" disabled>↶ Undo</button>
         </div>
       </main>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
+

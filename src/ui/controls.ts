@@ -1,7 +1,7 @@
 import type { Grid } from '../game/grid'
 import { toggleWall } from '../game/grid'
 import type { CanvasRenderer } from '../renderer/canvas'
-import { updateHUD } from './hud'
+import { updateHUD, showFeedback } from './hud'
 
 /**
  * Set up event listeners for game controls.
@@ -19,7 +19,16 @@ export function setupControls(
 
     const wall = renderer.getWallFromClick(x, y)
     if (wall) {
-      toggleWall(grid, wall)
+      const result = toggleWall(grid, wall)
+
+      if (result === null) {
+        showFeedback('❌ No walls remaining!')
+      } else if (result === true) {
+        showFeedback('✓ Wall placed')
+      } else {
+        showFeedback('✗ Wall removed')
+      }
+
       renderer.render()
       updateHUD(grid)
     }
@@ -28,6 +37,12 @@ export function setupControls(
   // Reset button
   const resetBtn = document.getElementById('btn-reset')
   if (resetBtn) {
-    resetBtn.addEventListener('click', onReset)
+    resetBtn.addEventListener('click', () => {
+      showFeedback('🔄 New puzzle loaded')
+      onReset()
+    })
   }
+
+  // Update initial HUD
+  updateHUD(grid)
 }

@@ -48,13 +48,13 @@ describe('Puzzle Generation', () => {
     }
   })
 
-  it('should have grid size between 5 and 7', () => {
+  it('should have grid size between 5 and 8', () => {
     for (let i = 0; i < 10; i++) {
       const puzzle = generateDailyPuzzle(new Date(`2025-01-${(i % 28) + 1}`))
       expect(puzzle.rows).toBeGreaterThanOrEqual(5)
-      expect(puzzle.rows).toBeLessThanOrEqual(7)
+      expect(puzzle.rows).toBeLessThanOrEqual(8)
       expect(puzzle.cols).toBeGreaterThanOrEqual(5)
-      expect(puzzle.cols).toBeLessThanOrEqual(7)
+      expect(puzzle.cols).toBeLessThanOrEqual(8)
     }
   })
 

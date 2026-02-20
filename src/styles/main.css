@@ -77,6 +77,10 @@ main {
   padding: 25px;
   border-radius: 15px;
   width: 100%;
+<<<<<<< HEAD
+=======
+  flex-wrap: wrap;
+>>>>>>> working-01
 }
 
 .hud-item {
@@ -101,6 +105,32 @@ main {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+<<<<<<< HEAD
+=======
+}
+
+.hud-detail {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.walls-bar {
+  width: 100px;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.walls-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  width: 100%;
+  transition: width 0.3s ease;
+  border-radius: 3px;
+>>>>>>> working-01
 }
 
 #game-canvas {
@@ -116,6 +146,29 @@ main {
 #game-canvas:hover {
   box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
   border-color: #667eea;
+<<<<<<< HEAD
+=======
+}
+
+#feedback {
+  height: 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #10b981;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#feedback.show {
+  opacity: 1;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+>>>>>>> working-01
 }
 
 #controls {
@@ -141,6 +194,65 @@ main {
 #controls button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+<<<<<<< HEAD
+=======
+}
+
+#controls button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+#controls button:hover:not(:disabled) {
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+}
+
+#controls button:hover:not(:disabled)::before {
+  left: 0;
+}
+
+#controls button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  #app {
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  #hud {
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .hud-value {
+    font-size: 2rem;
+  }
+
+  #controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #controls button {
+    width: 100%;
+  }
+>>>>>>> working-01
 }
 
 #controls button::before {
